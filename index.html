@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Hub Pro | Lead by Abdullah Ikram</title>
+    <title>Quantum Hub Pro | Abdullah Ikram</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,7 +12,6 @@
             --bg-dark: #020205;
             --panel-bg: rgba(8, 8, 15, 0.98);
             --glass-border: 1px solid rgba(0, 242, 255, 0.25);
-            --glow-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
         }
 
         body {
@@ -28,7 +27,6 @@
             background: radial-gradient(circle at center, #0a0a1f 0%, #020205 100%);
         }
 
-        /* Outer Frame for the whole page */
         body::after {
             content: "";
             position: fixed;
@@ -39,7 +37,6 @@
             z-index: 1000;
         }
 
-        /* Neon Clock Container */
         .clock-frame {
             position: relative;
             padding: 50px 100px;
@@ -47,27 +44,25 @@
             border: 2px solid rgba(0, 242, 255, 0.2);
             background: rgba(255, 255, 255, 0.01);
             backdrop-filter: blur(10px);
-            box-shadow: inset 0 0 30px rgba(0, 242, 255, 0.05), 0 0 40px rgba(0, 242, 255, 0.1);
+            box-shadow: 0 0 40px rgba(0, 242, 255, 0.1);
             text-align: center;
             transition: 0.5s;
         }
 
         .clock-frame:hover {
             border-color: var(--neon-blue);
-            box-shadow: inset 0 0 40px rgba(0, 242, 255, 0.1), 0 0 60px rgba(0, 242, 255, 0.2);
+            box-shadow: 0 0 60px rgba(0, 242, 255, 0.2);
         }
 
         #clock {
-            font-size: clamp(3rem, 15vw, 9rem);
+            font-size: clamp(3rem, 12vw, 8rem);
             font-family: 'Share Tech Mono', monospace;
             color: var(--neon-blue);
             text-shadow: 0 0 12px rgba(0, 242, 255, 0.6);
-            letter-spacing: 8px;
+            letter-spacing: 5px;
             margin: 0;
-            user-select: none;
         }
 
-        /* Navigation Menu */
         .side-nav {
             position: fixed;
             left: 35px;
@@ -75,20 +70,20 @@
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
             z-index: 1100;
         }
 
         .nav-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 18px;
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
             background: rgba(255, 255, 255, 0.03);
             border: var(--glass-border);
             color: var(--neon-blue);
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             cursor: pointer;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -98,11 +93,10 @@
         .nav-btn:hover, .nav-btn.active {
             background: var(--neon-blue);
             color: #000;
-            box-shadow: 0 0 25px var(--neon-blue);
-            transform: scale(1.1) translateX(10px);
+            box-shadow: 0 0 20px var(--neon-blue);
+            transform: scale(1.1);
         }
 
-        /* Dynamic Panels */
         .panel {
             position: fixed;
             right: -450px;
@@ -113,10 +107,10 @@
             backdrop-filter: blur(25px);
             border-radius: 30px;
             border: var(--glass-border);
-            padding: 35px;
-            transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            padding: 30px;
+            transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
             z-index: 900;
-            box-shadow: -20px 0 60px rgba(0,0,0,0.7);
+            box-shadow: -20px 0 60px rgba(0,0,0,0.5);
             box-sizing: border-box;
             overflow-y: auto;
         }
@@ -126,66 +120,54 @@
         .panel h2 {
             margin-top: 0;
             color: var(--neon-blue);
-            font-size: 1.6rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-size: 1.4rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             padding-bottom: 15px;
         }
 
-        /* Team Section - Hierarchy */
         .member-card {
-            background: rgba(255,255,255,0.02);
-            border-radius: 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
             padding: 20px;
             margin-bottom: 15px;
             border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
         }
-        .member-card.lead {
-            border-color: var(--neon-blue);
-            background: rgba(0, 242, 255, 0.05);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
-        }
-        .member-name { font-weight: 600; font-size: 1.15rem; color: #fff; display: block; }
-        .member-role { font-size: 0.75rem; color: var(--neon-blue); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; display: block; }
 
-        /* TTS Interface */
+        .member-card.lead { border-color: var(--neon-blue); background: rgba(0, 242, 255, 0.05); }
+        .member-name { font-weight: 600; display: block; }
+        .member-role { font-size: 0.7rem; color: var(--neon-blue); text-transform: uppercase; margin-top: 5px; display: block; }
+
         textarea {
-            width: 100%; height: 160px;
-            background: rgba(0,0,0,0.5);
+            width: 100%; height: 150px;
+            background: rgba(0,0,0,0.3);
             border: var(--glass-border);
             border-radius: 15px;
             color: #fff; padding: 15px;
-            font-family: inherit; font-size: 1rem; resize: none;
-            box-sizing: border-box; outline: none;
+            font-family: inherit; resize: none; box-sizing: border-box; outline: none;
         }
+
         .action-btn {
-            width: 100%; padding: 16px; border-radius: 12px; border: none;
-            font-weight: 700; cursor: pointer; margin-top: 15px;
-            transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
+            width: 100%; padding: 15px; border-radius: 10px; border: none;
+            font-weight: 700; cursor: pointer; margin-top: 10px; transition: 0.3s;
         }
         .btn-play { background: var(--neon-blue); color: #000; }
         .btn-stop { background: #ff3366; color: #fff; }
 
-        /* Full Calculator Grid */
         .calc-screen {
-            background: #000; border: var(--glass-border); border-radius: 15px;
-            padding: 25px; text-align: right; font-size: 2.2rem;
+            background: #000; border: var(--glass-border); border-radius: 12px;
+            padding: 20px; text-align: right; font-size: 1.8rem;
             color: var(--neon-blue); font-family: 'Share Tech Mono', monospace;
-            margin-bottom: 20px; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            margin-bottom: 15px; height: 40px; overflow: hidden;
         }
-        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
         .c-btn {
-            padding: 18px; background: rgba(255,255,255,0.05);
+            padding: 15px; background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1); color: #fff;
-            border-radius: 15px; cursor: pointer; font-weight: 700; font-size: 1.1rem;
-            transition: 0.2s;
+            border-radius: 12px; cursor: pointer; font-weight: 600;
         }
-        .c-btn:hover { background: rgba(0, 242, 255, 0.15); border-color: var(--neon-blue); }
-        .c-btn.op { color: var(--neon-blue); font-size: 1.3rem; }
+        .c-btn:hover { background: rgba(0, 242, 255, 0.1); border-color: var(--neon-blue); }
+        .c-btn.op { color: var(--neon-blue); }
         .c-btn.eq { background: var(--neon-blue); color: #000; grid-column: span 2; }
-
     </style>
 </head>
 <body>
@@ -206,10 +188,15 @@
             <span class="member-name">Abdullah Ikram Mahmoud</span>
             <span class="member-role">Team Leader & Lead Developer</span>
         </div>
+        <div class="member-card">
+            <span class="member-name">Quantum Assistant</span>
+            <span class="member-role">Sub-Processing Unit</span>
+        </div>
+    </div>
 
     <div id="tts" class="panel">
         <h2>Speech Engine</h2>
-        <textarea id="tts-input" placeholder="Enter text to synthesize..."></textarea>
+        <textarea id="tts-input" placeholder="اكتب شيئاً ليتم نطقه..."></textarea>
         <button class="action-btn btn-play" onclick="speak()">Execute Speech 🔊</button>
         <button class="action-btn btn-stop" onclick="stopS()">Halt Process ⏹</button>
     </div>
@@ -245,7 +232,7 @@
     </div>
 
     <script>
-        // System Clock Initialization
+        // Clock
         function updateTime() {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString('en-GB');
@@ -253,39 +240,40 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // Panel Navigation Manager
+        // Navigation
         function toggle(id) {
-            const panel = document.getElementById(id);
-            const isOpen = panel.classList.contains('open');
-            
-            document.querySelectorAll('.panel').forEach(p => p.classList.remove('open'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            
-            if(!isOpen) {
-                panel.classList.add('open');
-                // Auto-set active state for menu icons
+            const panels = document.querySelectorAll('.panel');
+            const btns = document.querySelectorAll('.nav-btn');
+            const targetPanel = document.getElementById(id);
+            const wasOpen = targetPanel.classList.contains('open');
+
+            panels.forEach(p => p.classList.remove('open'));
+            btns.forEach(b => b.classList.remove('active'));
+
+            if (!wasOpen) {
+                targetPanel.classList.add('open');
                 const btnIdx = {'team':0, 'tts':1, 'calc':2}[id];
-                document.querySelectorAll('.nav-btn')[btnIdx].classList.add('active');
+                btns[btnIdx].classList.add('active');
             }
         }
 
-        // Speech Engine Controller
+        // TTS Engine
         function speak() {
             window.speechSynthesis.cancel();
             const text = document.getElementById('tts-input').value;
             if(!text.trim()) return;
             const msg = new SpeechSynthesisUtterance(text);
-            msg.rate = 1.0;
             msg.lang = /[\u0600-\u06FF]/.test(text) ? 'ar-SA' : 'en-US';
             window.speechSynthesis.speak(msg);
         }
         function stopS() { window.speechSynthesis.cancel(); }
 
-        // Logic Calculator Engine
+        // Calculator Engine
         let query = "";
         const screen = document.getElementById('display');
 
         function put(val) {
+            if (query === "0" && val !== ".") query = ""; 
             query += val;
             screen.innerText = query;
         }
@@ -298,9 +286,9 @@
         function exe() {
             try {
                 if(!query) return;
-                // Safe calculation using Function constructor
+                // Using Function instead of eval for slight safety boost
                 let result = new Function('return ' + query)();
-                query = Number.isInteger(result) ? result.toString() : result.toFixed(2).toString();
+                query = result.toString();
                 screen.innerText = query;
             } catch (err) {
                 screen.innerText = "Error";
