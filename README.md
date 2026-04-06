@@ -1,24 +1,27 @@
 # 🌐 Kodizim Core | Quantum Hub Pro
 **Lead Developer:** Abdullah Ikram Mahmoud  
-**Status:** Version 2.0 (Stable)
+**Current Version:** 2.0 (Stable)
+**Location:** Egypt
 
 ---
 
-## 🚀 عن المشروع (Project Overview)
-مشروع **Kodizim Core** هو واجهة مستخدم متطورة (Advanced Dashboard) تدمج مجموعة من الأدوات البرمجية الأساسية في صفحة واحدة بتصميم نيوني (Neon Design) عصري. تم بناء المشروع باستخدام تقنيات الويب الحديثة لضمان السرعة والكفاءة.
+## 🚀 Project Overview
+**Kodizim Core** is an advanced User Interface (Dashboard) that integrates essential programming and productivity tools into a single, cohesive experience. Designed with a **Neon-Tech** aesthetic, it focuses on high performance and seamless user interaction (UX).
 
-## 🛠 التقنيات المستخدمة (Tech Stack)
-* **HTML5:** لبناء الهيكل التنظيمي والدلالي للموقع.
-* **CSS3:** للتنسيق المتقدم، الأنيميشن، وتأثيرات الزجاج (Glassmorphism).
-* **JavaScript (ES6):** للتحكم في منطق الساعة، الآلة الحاسبة، ومحرك النطق.
-* **Web Speech API:** لتمكين خاصية تحويل النص إلى صوت بشكل طبيعي.
 
-## 👥 فريق العمل (Project Team)
-تحت قيادة المهندس **عبد الله إكرام**، تم تقسيم المهام كالتالي:
 
-| العضو | الدور الوظيفي |
+## 🛠 Tech Stack
+* **HTML5:** Structured using semantic elements for SEO and accessibility.
+* **CSS3:** Featuring **Glassmorphism** effects, custom animations, and a responsive grid system.
+* **JavaScript (ES6):** Powering the core logic for the real-time clock, complex calculations, and the speech engine.
+* **Web Speech API:** Integrated for high-quality Text-to-Speech (TTS) functionality.
+
+## 👥 Project Team
+Managed and Led by **Abdullah Ikram**, the team roles are distributed as follows:
+
+| Name | Role |
 | :--- | :--- |
-| **Abdullah Ikram** | **Team Leader & Lead Developer** |
+| **Abdullah Ikram Mahmoud** | **Team Leader & Lead Developer** |
 | Mohamed Refaie | Assistant Developer |
 | Mohamed Shehata | Assistant Developer |
 | Moataz Mohsen | Assistant Developer |
@@ -26,14 +29,16 @@
 | Marina Magdy Talaat | Assistant Designer |
 | Radwa Mostafa | Assistant Designer |
 
-## ⚙️ المميزات (Features)
-1.  **Neon Digital Clock:** ساعة رقمية دقيقة تعمل بنظام 24 ساعة.
-2.  **Professional Calculator:** آلة حاسبة متكاملة للعمليات الحسابية السريعة.
-3.  **Smart Speech Engine:** محرك نطق يدعم اللغتين العربية والإنجليزية مع تحسين نبرة الصوت.
-4.  **Responsive Design:** واجهة متوافقة مع جميع أحجام الشاشات.
+## ⚙️ Key Features
+1.  **Neon Digital Clock:** A high-precision 24-hour digital clock.
+2.  **Advanced Calculator:** A fully functional engine for rapid arithmetic operations.
+3.  **Smart Speech Engine:** Multi-language support (Arabic/English) with optimized vocal pitch and rate for natural clarity.
+4.  **Universal Responsiveness:** Optimized for Desktops, Tablets, and Mobile devices.
 
-## 📂 كيفية التشغيل (How to Run)
-لا يحتاج المشروع لأي تنصيب خارجي، فقط قم بفتح ملف `index.html` في أي متصفح حديث.
+## 📂 Deployment & Usage
+The project is hosted via **GitHub Pages**. No installation is required.
+1. Clone the repository.
+2. Open `index.html` in any modern web browser.
 
 ---
-© 2026 **Kodizim Tech** | Developed with passion by Abdullah Ikram.
+© 2026 **Kodizim Tech** | Engineered with precision by Abdullah Ikram.
