@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kodizim Core</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root { --neon-blue: #00f2ff; --bg-dark: #020205; --panel-bg: rgba(8, 8, 15, 0.98); --glass-border: 1px solid rgba(0, 242, 255, 0.25); }
+        body { margin: 0; background: var(--bg-dark); color: #fff; font-family: 'Quicksand', sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: radial-gradient(circle at center, #0a0a1f 0%, #020205 100%); touch-action: manipulation; }
+        .clock-frame { position: relative; padding: 50px 100px; border-radius: 40px; border: 2px solid rgba(0, 242, 255, 0.2); background: rgba(255, 255, 255, 0.01); backdrop-filter: blur(10px); box-shadow: inset 0 0 30px rgba(0, 242, 255, 0.05), 0 0 40px rgba(0, 242, 255, 0.1); }
+        #clock { font-size: clamp(3rem, 15vw, 9rem); font-family: 'Share Tech Mono', monospace; color: var(--neon-blue); text-shadow: 0 0 12px rgba(0, 242, 255, 0.6); letter-spacing: 8px; }
+        .side-nav { position: fixed; left: 35px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 15px; z-index: 1100; }
+        .nav-btn { width: 55px; height: 55px; border-radius: 15px; background: rgba(255, 255, 255, 0.03); border: var(--glass-border); color: var(--neon-blue); font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .nav-btn:hover, .nav-btn.active { background: var(--neon-blue); color: #000; box-shadow: 0 0 20px var(--neon-blue); }
+        .panel { position: fixed; right: -450px; top: 25px; width: 380px; height: calc(100vh - 50px); background: var(--panel-bg); backdrop-filter: blur(25px); border-radius: 30px; border: var(--glass-border); padding: 25px; transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1); z-index: 900; overflow-y: auto; box-sizing: border-box; }
+        .panel.open { right: 25px; }
+        .member-card { background: rgba(255,255,255,0.02); border-radius: 12px; padding: 12px; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.05); }
+        .member-card.lead { border-color: var(--neon-blue); background: rgba(0, 242, 255, 0.05); }
+        .member-name { font-weight: 600; font-size: 1rem; color: #fff; display: block; }
+        .member-role { font-size: 0.65rem; color: var(--neon-blue); text-transform: uppercase; display: block; }
+        textarea { width: 100%; height: 120px; background: rgba(0,0,0,0.4); border: var(--glass-border); border-radius: 12px; color: #fff; padding: 12px; margin-top: 10px; resize: none; box-sizing: border-box; }
+        .action-btn { width: 100%; padding: 12px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; margin-top: 10px; background: var(--neon-blue); color: #000; }
+        .calc-screen { background: #000; border: var(--glass-border); border-radius: 12px; padding: 15px; text-align: right; font-size: 1.8rem; color: var(--neon-blue); font-family: 'Share Tech Mono', monospace; margin-bottom: 10px; overflow: hidden; }
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .c-btn { padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); color: #fff; cursor: pointer; font-weight: 600; }
+        .c-btn.op { color: var(--neon-blue); }
+        .c-btn.eq { background: var(--neon-blue); color: #000; grid-column: span 2; }
+        @media (max-width: 768px) {
+            .clock-frame { padding: 25px; border-radius: 20px; }
+            #clock { font-size: 3.5rem; letter-spacing: 2px; }
+            .side-nav { left: 10px; bottom: 20px; top: auto; transform: none; flex-direction: row; width: calc(100% - 20px); justify-content: center; }
+            .panel { width: 100%; right: -100%; height: 75vh; top: auto; bottom: 0; border-radius: 30px 30px 0 0; }
+            .panel.open { right: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-frame"><div id="clock">00:00:00</div></div>
+    <nav class="side-nav">
+        <button class="nav-btn" onclick="toggle('team')">👥</button>
+        <button class="nav-btn" onclick="toggle('tts')">🔊</button>
+        <button class="nav-btn" onclick="toggle('calc')">⧓</button>
+    </nav>
+
+    <div id="team" class="panel">
+        <h2>Team</h2>
+        <div class="member-card lead"><span class="member-name">Abdullah Ikram Mahmoud</span><span class="member-role">Leader & Lead Dev</span></div>
+        <div class="member-card"><span class="member-name">Mohamed Refaie</span><span class="member-role">Assistant Dev</span></div>
+        <div class="member-card"><span class="member-name">Mohamed Shehata</span><span class="member-role">Assistant Dev</span></div>
+        <div class="member-card"><span class="member-name">Moataz Mohsen</span><span class="member-role">Assistant Dev</span></div>
+        <div class="member-card"><span class="member-name">AnaSemon Yosery</span><span class="member-role">Assistant Designer</span></div>
+        <div class="member-card"><span class="member-name">Marina Magdy Talaat</span><span class="member-role">Assistant Designer</span></div>
+        <div class="member-card"><span class="member-name">Radwa Mostafa</span><span class="member-role">Assistant Designer</span></div>
+    </div>
+
+    <div id="tts" class="panel">
+        <h2>Speech Engine</h2>
+        <textarea id="tts-input" placeholder="Enter text..."></textarea>
+        <button class="action-btn" onclick="speak()">Speak 🔊</button>
+    </div>
+
+    <div id="calc" class="panel">
+        <h2>Calculator</h2>
+        <div class="calc-screen" id="display">0</div>
+        <div class="calc-grid">
+            <button class="c-btn op" onclick="clr()">AC</button>
+            <button class="c-btn op" onclick="put('/')">/</button>
+            <button class="c-btn op" onclick="put('*')">×</button>
+            <button class="c-btn op" onclick="put('-')">−</button>
+            <button class="c-btn" onclick="put('7')">7</button>
+            <button class="c-btn" onclick="put('8')">8</button>
+            <button class="c-btn" onclick="put('9')">9</button>
+            <button class="c-btn op" onclick="put('+')">+</button>
+            <button class="c-btn" onclick="put('4')">4</button>
+            <button class="c-btn" onclick="put('5')">5</button>
+            <button class="c-btn" onclick="put('6')">6</button>
+            <button class="c-btn" onclick="put('.')">.</button>
+            <button class="c-btn" onclick="put('1')">1</button>
+            <button class="c-btn" onclick="put('2')">2</button>
+            <button class="c-btn" onclick="put('3')">3</button>
+            <button class="c-btn" onclick="put('0')">0</button>
+            <button class="c-btn eq" onclick="exe()">=</button>
+        </div>
+    </div>
+
+    <script>
+        function updateTime() {
+            const n = new Date();
+            document.getElementById('clock').innerText = n.getHours().toString().padStart(2, '0') + ":" + 
+                n.getMinutes().toString().padStart(2, '0') + ":" + n.getSeconds().toString().padStart(2, '0');
+        }
+        setInterval(updateTime, 1000); updateTime();
+
+        function toggle(id) {
+            const p = document.getElementById(id);
+            const isOpen = p.classList.contains('open');
+            document.querySelectorAll('.panel').forEach(el => el.classList.remove('open'));
+            if (!isOpen) p.classList.add('open');
+        }
+
+        function speak() {
+            window.speechSynthesis.cancel();
+            const t = document.getElementById('tts-input').value;
+            if(!t.trim()) return;
+            const m = new SpeechSynthesisUtterance(t);
+            m.lang = /[\u0600-\u06FF]/.test(t) ? 'ar-SA' : 'en-US';
+            window.speechSynthesis.speak(m);
+        }
+
+        let q = "";
+        function put(v) { q += v; document.getElementById('display').innerText = q; }
+        function clr() { q = ""; document.getElementById('display').innerText = "0"; }
+        function exe() {
+            try { q = (new Function('return ' + q)()).toString(); document.getElementById('display').innerText = q; }
+            catch { document.getElementById('display').innerText = "Error"; q = ""; }
+        }
+    </script>
+</body>
+</html>
