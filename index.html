@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kodizim Core | Lead by Abdullah Ikram</title>
+    <title>Kodizim | Pro Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -21,9 +21,33 @@
             touch-action: manipulation;
         }
 
-        body::after {
-            content: ""; position: fixed; top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid rgba(0, 242, 255, 0.1); pointer-events: none; border-radius: 20px; z-index: 1000;
+        /* Top Bar for Logo */
+        .top-header {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1300;
+        }
+
+        .kodizim-icon {
+            width: 45px; height: 45px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.5rem; font-weight: bold; color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+            background: rgba(0, 242, 255, 0.05);
+        }
+
+        .brand-name {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.2rem; letter-spacing: 3px;
+            color: #fff; text-transform: uppercase;
+            text-shadow: 0 0 5px rgba(255,255,255,0.3);
         }
 
         .clock-frame {
@@ -33,8 +57,8 @@
         }
 
         #clock {
-            font-size: clamp(2rem, 12vw, 5.5rem); font-family: 'Share Tech Mono', monospace;
-            color: var(--neon-blue); text-shadow: 0 0 10px rgba(0, 242, 255, 0.6); letter-spacing: 3px; margin: 0;
+            font-size: clamp(2.5rem, 15vw, 6.5rem); font-family: 'Share Tech Mono', monospace;
+            color: var(--neon-blue); text-shadow: 0 0 15px rgba(0, 242, 255, 0.6); letter-spacing: 4px; margin: 0;
         }
 
         .center-nav { display: flex; gap: 20px; z-index: 1100; }
@@ -59,6 +83,11 @@
             .panel.open { right: 20px; }
         }
 
+        @media (max-width: 600px) {
+            .top-header { left: 50%; transform: translateX(-50%); top: 15px; }
+            .brand-name { font-size: 1rem; }
+        }
+
         .panel.open { right: 0; }
         .panel-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px; }
         .panel h2 { margin: 0; color: var(--neon-blue); font-size: 1.4rem; }
@@ -70,17 +99,20 @@
         .member-role { font-size: 0.65rem; color: var(--neon-blue); text-transform: uppercase; display: block; margin-top: 2px; }
 
         textarea { width: 100%; height: 120px; background: rgba(0,0,0,0.5); border: var(--glass-border); border-radius: 12px; color: #fff; padding: 12px; resize: none; box-sizing: border-box; outline: none; font-size: 1rem; }
-        .action-btn { width: 100%; padding: 15px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 1rem; }
-        .btn-play { background: var(--neon-blue); color: #000; }
+        .action-btn { width: 100%; padding: 15px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 1rem; background: var(--neon-blue); color: #000; }
         
         .calc-screen { background: #000; border: var(--glass-border); border-radius: 12px; padding: 15px; text-align: right; font-size: 1.8rem; color: var(--neon-blue); font-family: 'Share Tech Mono', monospace; margin-bottom: 10px; min-height: 60px; word-break: break-all; }
         .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
         .c-btn { padding: 18px 10px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); color: #fff; cursor: pointer; font-size: 1.1rem; }
-        .c-btn:active { background: rgba(0, 242, 255, 0.2); }
         .c-btn.eq { background: var(--neon-blue); color: #000; grid-column: span 2; }
     </style>
 </head>
 <body>
+
+    <header class="top-header">
+        <div class="kodizim-icon">K</div>
+        <div class="brand-name">Kodizim</div>
+    </header>
 
     <div class="clock-frame">
         <div id="clock">00:00:00</div>
@@ -106,7 +138,7 @@
     <div id="tts" class="panel">
         <div class="panel-header"><h2>Speech Engine</h2><button class="close-btn" onclick="toggle('tts')">×</button></div>
         <textarea id="tts-input" placeholder="Type here..."></textarea>
-        <button class="action-btn btn-play" onclick="speak()">Speak 🔊</button>
+        <button class="action-btn" onclick="speak()">Speak 🔊</button>
         <button class="action-btn" style="background:#ff3366; color:#fff" onclick="stopS()">Stop ⏹</button>
     </div>
 
