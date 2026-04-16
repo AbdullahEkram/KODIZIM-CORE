@@ -7,104 +7,77 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-blue: #00f2ff;
-            --bg-dark: #020205;
-            --panel-bg: rgba(8, 8, 15, 0.98);
-            --glass-border: 1px solid rgba(0, 242, 255, 0.25);
+            --neon: #00f2ff; --bg: #020205; --p-bg: rgba(8, 8, 15, 0.98); --brd: rgba(0, 242, 255, 0.25);
+            --text: #fff; --card: rgba(255,255,255,0.03);
         }
-
+        .light-mode {
+            --neon: #007bff; --bg: #f0f2f5; --p-bg: rgba(255, 255, 255, 0.98); --brd: rgba(0, 123, 255, 0.25);
+            --text: #1a1a1a; --card: rgba(0,0,0,0.05);
+        }
         body {
-            margin: 0; background: var(--bg-dark); color: #fff;
-            font-family: 'Quicksand', sans-serif; height: 100vh;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            overflow: hidden; background: radial-gradient(circle at center, #0a0a1f 0%, #020205 100%);
-            touch-action: manipulation;
+            margin: 0; background: var(--bg); color: var(--text); font-family: 'Quicksand', sans-serif; height: 100vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;
+            transition: 0.3s; touch-action: manipulation;
         }
 
-        /* Top Bar for Logo */
+        /* Fixed Top Header Branding */
         .top-header {
-            position: fixed;
-            top: 25px;
-            left: 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            z-index: 1300;
+            position: fixed; top: 20px; left: 25px;
+            display: flex; align-items: center; gap: 12px; z-index: 1000;
+            pointer-events: none; /* Layout safety */
         }
-
         .kodizim-icon {
-            width: 45px; height: 45px;
-            border: 2px solid var(--neon-blue);
-            border-radius: 12px;
+            width: 42px; height: 42px; border: 2px solid var(--neon); border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1.5rem; font-weight: bold; color: var(--neon-blue);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+            font-family: 'Share Tech Mono', monospace; font-size: 1.5rem;
+            color: var(--neon); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
             background: rgba(0, 242, 255, 0.05);
         }
-
-        .brand-name {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1.2rem; letter-spacing: 3px;
-            color: #fff; text-transform: uppercase;
-            text-shadow: 0 0 5px rgba(255,255,255,0.3);
+        .brand-name { 
+            font-family: 'Share Tech Mono', monospace; font-size: 1.2rem; 
+            letter-spacing: 3px; text-transform: uppercase; color: var(--text);
         }
 
-        .clock-frame {
-            margin-bottom: 30px; padding: 20px 40px; border-radius: 25px;
-            border: 1px solid rgba(0, 242, 255, 0.2); background: rgba(255, 255, 255, 0.01);
-            backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(0, 242, 255, 0.05); text-align: center;
-        }
-
-        #clock {
-            font-size: clamp(2.5rem, 15vw, 6.5rem); font-family: 'Share Tech Mono', monospace;
-            color: var(--neon-blue); text-shadow: 0 0 15px rgba(0, 242, 255, 0.6); letter-spacing: 4px; margin: 0;
-        }
-
-        .center-nav { display: flex; gap: 20px; z-index: 1100; }
-
-        .nav-btn {
-            width: 65px; height: 65px; border-radius: 18px; background: rgba(255, 255, 255, 0.03);
-            border: var(--glass-border); color: var(--neon-blue); font-size: 1.6rem; cursor: pointer;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; justify-content: center;
-        }
-
-        .nav-btn:active { transform: scale(0.9); background: var(--neon-blue); color: #000; }
-
-        .panel {
-            position: fixed; right: -100%; top: 0; width: 100%; height: 100%;
-            background: var(--panel-bg); backdrop-filter: blur(20px); padding: 25px;
-            transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1); z-index: 1200;
-            box-sizing: border-box; overflow-y: auto;
-        }
-
-        @media (min-width: 768px) {
-            .panel { width: 380px; right: -450px; height: calc(100vh - 40px); top: 20px; border-radius: 25px; border: var(--glass-border); }
-            .panel.open { right: 20px; }
-        }
-
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .top-header { left: 50%; transform: translateX(-50%); top: 15px; }
             .brand-name { font-size: 1rem; }
         }
 
+        .clock-frame { margin-bottom: 30px; padding: 15px 35px; border-radius: 20px; border: 1px solid var(--brd); backdrop-filter: blur(10px); }
+        #clock { font-size: clamp(2.5rem, 15vw, 6.5rem); font-family: 'Share Tech Mono', monospace; color: var(--neon); text-shadow: 0 0 15px var(--neon); }
+
+        .center-nav { display: flex; gap: 15px; z-index: 1100; flex-wrap: wrap; justify-content: center; }
+        .nav-btn {
+            width: 58px; height: 58px; border-radius: 16px; background: var(--card); border: 1px solid var(--brd);
+            color: var(--neon); font-size: 1.5rem; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;
+        }
+        .nav-btn:active { transform: scale(0.9); background: var(--neon); color: #000; }
+
+        .panel {
+            position: fixed; right: -100%; top: 0; width: 100%; height: 100%; background: var(--p-bg);
+            backdrop-filter: blur(25px); padding: 25px; transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1); z-index: 2000;
+            box-sizing: border-box; overflow-y: auto;
+        }
+        @media (min-width: 768px) {
+            .panel { width: 380px; right: -450px; height: 85vh; top: 7.5vh; border-radius: 25px; border: 1px solid var(--brd); }
+            .panel.open { right: 25px; }
+        }
         .panel.open { right: 0; }
-        .panel-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; margin-bottom: 20px; }
-        .panel h2 { margin: 0; color: var(--neon-blue); font-size: 1.4rem; }
-        .close-btn { background: none; border: none; color: #ff3366; font-size: 1.5rem; cursor: pointer; }
+        .panel-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--brd); padding-bottom: 12px; margin-bottom: 20px; }
+        .panel h2 { margin:0; color: var(--neon); font-size: 1.3rem; }
+        .close-p { background:none; border:none; color:#ff3366; font-size:1.8rem; cursor:pointer; }
 
-        .member-card { background: rgba(255,255,255,0.02); border-radius: 12px; padding: 12px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); }
-        .member-card.lead { border-color: var(--neon-blue); background: rgba(0, 242, 255, 0.05); }
-        .member-name { font-weight: 600; font-size: 1rem; color: #fff; display: block; }
-        .member-role { font-size: 0.65rem; color: var(--neon-blue); text-transform: uppercase; display: block; margin-top: 2px; }
+        /* Notes & TTS */
+        select, textarea { width: 100%; background: var(--card); border: 1px solid var(--brd); border-radius: 12px; color: var(--text); padding: 12px; margin-bottom: 12px; outline: none; font-family: inherit; }
+        .action-btn { width: 100%; padding: 14px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; margin-top: 5px; background: var(--neon); color: #000; }
+        .note-item { background: var(--card); padding: 12px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid var(--neon); display: flex; justify-content: space-between; align-items: center; }
 
-        textarea { width: 100%; height: 120px; background: rgba(0,0,0,0.5); border: var(--glass-border); border-radius: 12px; color: #fff; padding: 12px; resize: none; box-sizing: border-box; outline: none; font-size: 1rem; }
-        .action-btn { width: 100%; padding: 15px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; margin-top: 10px; font-size: 1rem; background: var(--neon-blue); color: #000; }
+        .member-card { background: var(--card); border-radius: 12px; padding: 12px; margin-bottom: 10px; border: 1px solid var(--brd); }
+        .member-role { font-size: 0.65rem; color: var(--neon); text-transform: uppercase; display: block; margin-top: 4px; }
         
-        .calc-screen { background: #000; border: var(--glass-border); border-radius: 12px; padding: 15px; text-align: right; font-size: 1.8rem; color: var(--neon-blue); font-family: 'Share Tech Mono', monospace; margin-bottom: 10px; min-height: 60px; word-break: break-all; }
-        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-        .c-btn { padding: 18px 10px; background: rgba(255,255,255,0.05); border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); color: #fff; cursor: pointer; font-size: 1.1rem; }
-        .c-btn.eq { background: var(--neon-blue); color: #000; grid-column: span 2; }
+        .calc-screen { background: #000; border: 1px solid var(--brd); border-radius: 12px; padding: 20px; text-align: right; font-size: 1.8rem; color: var(--neon); font-family: 'Share Tech Mono', monospace; margin-bottom: 15px; }
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .c-btn { padding: 18px; background: var(--card); border-radius: 10px; border: 1px solid var(--brd); color: var(--text); cursor: pointer; font-size: 1.1rem; }
     </style>
 </head>
 <body>
@@ -114,94 +87,99 @@
         <div class="brand-name">Kodizim</div>
     </header>
 
-    <div class="clock-frame">
-        <div id="clock">00:00:00</div>
-    </div>
+    <div class="clock-frame"><div id="clock">00:00:00</div></div>
 
     <nav class="center-nav">
-        <button class="nav-btn" onclick="toggle('team')">👥</button>
-        <button class="nav-btn" onclick="toggle('tts')">🔊</button>
-        <button class="nav-btn" onclick="toggle('calc')">⧓</button>
+        <button class="nav-btn" onclick="toggle('team')" title="Team">👥</button>
+        <button class="nav-btn" onclick="toggle('tts')" title="Speech">🔊</button>
+        <button class="nav-btn" onclick="toggle('calc')" title="Calculator">⧓</button>
+        <button class="nav-btn" onclick="toggle('notes')" title="Notes">📝</button>
+        <button class="nav-btn" onclick="toggleTheme()" title="Theme">🌓</button>
     </nav>
 
     <div id="team" class="panel">
-        <div class="panel-header"><h2>Project Team</h2><button class="close-btn" onclick="toggle('team')">×</button></div>
-        <div class="member-card lead"><span class="member-name">Abdullah Ikram Mahmoud</span><span class="member-role">Team Leader & Lead Developer</span></div>
-        <div class="member-card"><span class="member-name">Mohamed Refaie</span><span class="member-role">Assistant Developer</span></div>
-        <div class="member-card"><span class="member-name">Mohamed Shehata</span><span class="member-role">Assistant Developer</span></div>
-        <div class="member-card"><span class="member-name">Moataz Mohsen</span><span class="member-role">Assistant Developer</span></div>
-        <div class="member-card"><span class="member-name">AnaSemon Yosery</span><span class="member-role">Assistant Designer</span></div>
-        <div class="member-card"><span class="member-name">Marina Magdy Talaat</span><span class="member-role">Assistant Designer</span></div>
-        <div class="member-card"><span class="member-name">Radwa Mostafa</span><span class="member-role">Assistant Designer</span></div>
+        <div class="panel-header"><h2>Project Team</h2><button class="close-p" onclick="toggle('team')">&times;</button></div>
+        <div class="member-card"><b>Abdullah Ikram</b><span class="member-role">Team Leader & Lead Dev</span></div>
+        <div class="member-card"><b>Mohamed Refaie</b><span class="member-role">Assistant Developer</span></div>
+        <div class="member-card"><b>Mohamed Shehata</b><span class="member-role">Assistant Developer</span></div>
+        <div class="member-card"><b>Moataz Mohsen</b><span class="member-role">Assistant Developer</span></div>
+        <div class="member-card"><b>AnaSemon / Marina / Radwa</b><span class="member-role">Design Team</span></div>
     </div>
 
     <div id="tts" class="panel">
-        <div class="panel-header"><h2>Speech Engine</h2><button class="close-btn" onclick="toggle('tts')">×</button></div>
-        <textarea id="tts-input" placeholder="Type here..."></textarea>
+        <div class="panel-header"><h2>Smart Speech</h2><button class="close-p" onclick="toggle('tts')">&times;</button></div>
+        <select id="voice-select"><option value="ar-SA">Arabic (Smooth)</option><option value="en-US">English (Pro)</option></select>
+        <textarea id="tts-input" placeholder="Enter text..."></textarea>
         <button class="action-btn" onclick="speak()">Speak 🔊</button>
-        <button class="action-btn" style="background:#ff3366; color:#fff" onclick="stopS()">Stop ⏹</button>
+        <button class="action-btn" style="background:#ff3366; color:#fff" onclick="window.speechSynthesis.cancel()">Stop ⏹</button>
+    </div>
+
+    <div id="notes" class="panel">
+        <div class="panel-header"><h2>Notes</h2><button class="close-p" onclick="toggle('notes')">&times;</button></div>
+        <textarea id="note-input" placeholder="New note..."></textarea>
+        <button class="action-btn" onclick="addNote()">Save Note +</button>
+        <div id="notes-list" style="margin-top:20px;"></div>
     </div>
 
     <div id="calc" class="panel">
-        <div class="panel-header"><h2>Calculator</h2><button class="close-btn" onclick="toggle('calc')">×</button></div>
+        <div class="panel-header"><h2>Calculator</h2><button class="close-p" onclick="toggle('calc')">&times;</button></div>
         <div class="calc-screen" id="display">0</div>
         <div class="calc-grid">
             <button class="c-btn" onclick="clr()" style="color:#ff3366">AC</button>
-            <button class="c-btn" onclick="put('/')">/</button>
-            <button class="c-btn" onclick="put('*')">×</button>
-            <button class="c-btn" onclick="put('-')">−</button>
-            <button class="c-btn" onclick="put('7')">7</button>
-            <button class="c-btn" onclick="put('8')">8</button>
-            <button class="c-btn" onclick="put('9')">9</button>
-            <button class="c-btn" onclick="put('+')">+</button>
-            <button class="c-btn" onclick="put('4')">4</button>
-            <button class="c-btn" onclick="put('5')">5</button>
-            <button class="c-btn" onclick="put('6')">6</button>
-            <button class="c-btn" onclick="put('.')">.</button>
-            <button class="c-btn" onclick="put('1')">1</button>
-            <button class="c-btn" onclick="put('2')">2</button>
-            <button class="c-btn" onclick="put('3')">3</button>
-            <button class="c-btn" onclick="put('0')">0</button>
-            <button class="c-btn eq" onclick="exe()">=</button>
+            <button class="c-btn" onclick="put('/')">/</button><button class="c-btn" onclick="put('*')">×</button><button class="c-btn" onclick="put('-')">−</button>
+            <button class="c-btn" onclick="put('7')">7</button><button class="c-btn" onclick="put('8')">8</button><button class="c-btn" onclick="put('9')">9</button><button class="c-btn" onclick="put('+')">+</button>
+            <button class="c-btn" onclick="put('4')">4</button><button class="c-btn" onclick="put('5')">5</button><button class="c-btn" onclick="put('6')">6</button><button class="c-btn" onclick="put('.')">.</button>
+            <button class="c-btn" onclick="put('1')">1</button><button class="c-btn" onclick="put('2')">2</button><button class="c-btn" onclick="put('3')">3</button><button class="c-btn" onclick="put('0')">0</button>
+            <button class="c-btn" onclick="exe()" style="grid-column: span 4; background: var(--neon); color:#000">=</button>
         </div>
     </div>
 
     <script>
         function updateTime() {
             const d = new Date();
-            document.getElementById('clock').innerText = 
-                d.getHours().toString().padStart(2, '0') + ":" + 
-                d.getMinutes().toString().padStart(2, '0') + ":" + 
-                d.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock').innerText = d.toTimeString().split(' ')[0];
         }
         setInterval(updateTime, 1000); updateTime();
 
         function toggle(id) {
             const p = document.getElementById(id);
-            const isOpen = p.classList.contains('open');
+            const active = p.classList.contains('open');
             document.querySelectorAll('.panel').forEach(el => el.classList.remove('open'));
-            if(!isOpen) p.classList.add('open');
+            if(!active) p.classList.add('open');
         }
+
+        function toggleTheme() { document.body.classList.toggle('light-mode'); }
 
         function speak() {
             window.speechSynthesis.cancel();
             const t = document.getElementById('tts-input').value;
             if(!t.trim()) return;
             const m = new SpeechSynthesisUtterance(t);
-            m.lang = /[\u0600-\u06FF]/.test(t) ? 'ar-SA' : 'en-US';
+            m.lang = document.getElementById('voice-select').value;
+            m.rate = 0.9; m.pitch = 1.0;
             window.speechSynthesis.speak(m);
         }
-        function stopS() { window.speechSynthesis.cancel(); }
+
+        function addNote() {
+            const inp = document.getElementById('note-input');
+            if(!inp.value.trim()) return;
+            const div = document.createElement('div');
+            div.className = 'note-item';
+            div.innerHTML = `<span>${inp.value}</span><button onclick="this.parentElement.remove()" style="background:none; border:none; color:#ff3366; font-size:1.2rem; cursor:pointer;">&times;</button>`;
+            document.getElementById('notes-list').prepend(div);
+            inp.value = '';
+        }
 
         let q = "";
         function put(v) { q += v; document.getElementById('display').innerText = q; }
         function clr() { q = ""; document.getElementById('display').innerText = "0"; }
         function exe() {
-            try {
+            try { 
                 let res = new Function('return ' + q)();
                 q = res.toString();
-                document.getElementById('display').innerText = q;
-            } catch { document.getElementById('display').innerText = "Error"; q = ""; }
+                document.getElementById('display').innerText = q; 
+            }
+            catch { document.getElementById('display').innerText = "Error"; q = ""; }
         }
     </script>
 </body>
