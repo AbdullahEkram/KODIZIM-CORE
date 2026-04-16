@@ -20,12 +20,12 @@
             transition: 0.3s; touch-action: manipulation;
         }
 
-        /* Fixed Top Header Branding */
+        /* Top Header with Logo and Theme Toggle */
         .top-header {
-            position: fixed; top: 20px; left: 25px;
-            display: flex; align-items: center; gap: 12px; z-index: 1000;
-            pointer-events: none; /* Layout safety */
+            position: fixed; top: 20px; left: 20px; right: 20px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1300;
         }
+        .brand-group { display: flex; align-items: center; gap: 12px; }
         .kodizim-icon {
             width: 42px; height: 42px; border: 2px solid var(--neon); border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
@@ -33,23 +33,21 @@
             color: var(--neon); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
             background: rgba(0, 242, 255, 0.05);
         }
-        .brand-name { 
-            font-family: 'Share Tech Mono', monospace; font-size: 1.2rem; 
-            letter-spacing: 3px; text-transform: uppercase; color: var(--text);
-        }
-
-        @media (max-width: 768px) {
-            .top-header { left: 50%; transform: translateX(-50%); top: 15px; }
-            .brand-name { font-size: 1rem; }
+        .brand-name { font-family: 'Share Tech Mono', monospace; font-size: 1.2rem; letter-spacing: 3px; text-transform: uppercase; }
+        
+        .theme-btn-top {
+            width: 45px; height: 45px; border-radius: 10px; background: var(--card); 
+            border: 1px solid var(--brd); color: var(--neon); cursor: pointer;
+            display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: 0.2s;
         }
 
         .clock-frame { margin-bottom: 30px; padding: 15px 35px; border-radius: 20px; border: 1px solid var(--brd); backdrop-filter: blur(10px); }
         #clock { font-size: clamp(2.5rem, 15vw, 6.5rem); font-family: 'Share Tech Mono', monospace; color: var(--neon); text-shadow: 0 0 15px var(--neon); }
 
-        .center-nav { display: flex; gap: 15px; z-index: 1100; flex-wrap: wrap; justify-content: center; }
+        .center-nav { display: flex; gap: 20px; z-index: 1100; }
         .nav-btn {
-            width: 58px; height: 58px; border-radius: 16px; background: var(--card); border: 1px solid var(--brd);
-            color: var(--neon); font-size: 1.5rem; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;
+            width: 65px; height: 65px; border-radius: 18px; background: var(--card); border: 1px solid var(--brd);
+            color: var(--neon); font-size: 1.6rem; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;
         }
         .nav-btn:active { transform: scale(0.9); background: var(--neon); color: #000; }
 
@@ -59,66 +57,67 @@
             box-sizing: border-box; overflow-y: auto;
         }
         @media (min-width: 768px) {
-            .panel { width: 380px; right: -450px; height: 85vh; top: 7.5vh; border-radius: 25px; border: 1px solid var(--brd); }
+            .panel { width: 400px; right: -450px; height: 85vh; top: 7.5vh; border-radius: 25px; border: 1px solid var(--brd); }
             .panel.open { right: 25px; }
         }
         .panel.open { right: 0; }
         .panel-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--brd); padding-bottom: 12px; margin-bottom: 20px; }
-        .panel h2 { margin:0; color: var(--neon); font-size: 1.3rem; }
-        .close-p { background:none; border:none; color:#ff3366; font-size:1.8rem; cursor:pointer; }
+        .close-p { background:none; border:none; color:#ff3366; font-size:2rem; cursor:pointer; }
 
-        /* Notes & TTS */
-        select, textarea { width: 100%; background: var(--card); border: 1px solid var(--brd); border-radius: 12px; color: var(--text); padding: 12px; margin-bottom: 12px; outline: none; font-family: inherit; }
-        .action-btn { width: 100%; padding: 14px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; margin-top: 5px; background: var(--neon); color: #000; }
-        .note-item { background: var(--card); padding: 12px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid var(--neon); display: flex; justify-content: space-between; align-items: center; }
-
-        .member-card { background: var(--card); border-radius: 12px; padding: 12px; margin-bottom: 10px; border: 1px solid var(--brd); }
-        .member-role { font-size: 0.65rem; color: var(--neon); text-transform: uppercase; display: block; margin-top: 4px; }
+        .member-card { background: var(--card); border-radius: 12px; padding: 15px; margin-bottom: 10px; border: 1px solid var(--brd); }
+        .member-card.lead { border-color: var(--neon); background: rgba(0, 242, 255, 0.05); }
+        .member-name { font-weight: 600; font-size: 1.1rem; display: block; }
+        .member-role { font-size: 0.7rem; color: var(--neon); text-transform: uppercase; display: block; margin-top: 5px; }
         
+        select, textarea { width: 100%; background: var(--card); border: 1px solid var(--brd); border-radius: 12px; color: var(--text); padding: 12px; margin-bottom: 12px; outline: none; font-family: inherit; }
+        .action-btn { width: 100%; padding: 15px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; background: var(--neon); color: #000; }
+
         .calc-screen { background: #000; border: 1px solid var(--brd); border-radius: 12px; padding: 20px; text-align: right; font-size: 1.8rem; color: var(--neon); font-family: 'Share Tech Mono', monospace; margin-bottom: 15px; }
         .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-        .c-btn { padding: 18px; background: var(--card); border-radius: 10px; border: 1px solid var(--brd); color: var(--text); cursor: pointer; font-size: 1.1rem; }
+        .c-btn { padding: 18px; background: var(--card); border-radius: 10px; border: 1px solid var(--brd); color: var(--text); cursor: pointer; }
     </style>
 </head>
 <body>
 
     <header class="top-header">
-        <div class="kodizim-icon">K</div>
-        <div class="brand-name">Kodizim</div>
+        <div class="brand-group">
+            <div class="kodizim-icon">K</div>
+            <div class="brand-name">Kodizim</div>
+        </div>
+        <button class="theme-btn-top" onclick="toggleTheme()" title="Toggle Theme">🌓</button>
     </header>
 
     <div class="clock-frame"><div id="clock">00:00:00</div></div>
 
     <nav class="center-nav">
-        <button class="nav-btn" onclick="toggle('team')" title="Team">👥</button>
-        <button class="nav-btn" onclick="toggle('tts')" title="Speech">🔊</button>
-        <button class="nav-btn" onclick="toggle('calc')" title="Calculator">⧓</button>
-        <button class="nav-btn" onclick="toggle('notes')" title="Notes">📝</button>
-        <button class="nav-btn" onclick="toggleTheme()" title="Theme">🌓</button>
+        <button class="nav-btn" onclick="toggle('team')">👥</button>
+        <button class="nav-btn" onclick="toggle('tts')">🔊</button>
+        <button class="nav-btn" onclick="toggle('calc')">⧓</button>
     </nav>
 
     <div id="team" class="panel">
         <div class="panel-header"><h2>Project Team</h2><button class="close-p" onclick="toggle('team')">&times;</button></div>
-        <div class="member-card"><b>Abdullah Ikram</b><span class="member-role">Team Leader & Lead Dev</span></div>
-        <div class="member-card"><b>Mohamed Refaie</b><span class="member-role">Assistant Developer</span></div>
-        <div class="member-card"><b>Mohamed Shehata</b><span class="member-role">Assistant Developer</span></div>
-        <div class="member-card"><b>Moataz Mohsen</b><span class="member-role">Assistant Developer</span></div>
-        <div class="member-card"><b>AnaSemon / Marina / Radwa</b><span class="member-role">Design Team</span></div>
+        <div class="member-card lead">
+            <span class="member-name">Abdullah Ikram Mahmoud</span>
+            <span class="member-role">Team Leader & Lead Developer</span>
+        </div>
+        <div class="member-card"><span class="member-name">Mohamed Refaie</span><span class="member-role">Assistant Developer</span></div>
+        <div class="member-card"><span class="member-name">Mohamed Shehata</span><span class="member-role">Assistant Developer</span></div>
+        <div class="member-card"><span class="member-name">Moataz Mohsen</span><span class="member-role">Assistant Developer</span></div>
+        <div class="member-card"><span class="member-name">AnaSemon Yosery</span><span class="member-role">Assistant Designer</span></div>
+        <div class="member-card"><span class="member-name">Marina Magdy Talaat</span><span class="member-role">Assistant Designer</span></div>
+        <div class="member-card"><span class="member-name">Radwa Mostafa</span><span class="member-role">Assistant Designer</span></div>
     </div>
 
     <div id="tts" class="panel">
         <div class="panel-header"><h2>Smart Speech</h2><button class="close-p" onclick="toggle('tts')">&times;</button></div>
-        <select id="voice-select"><option value="ar-SA">Arabic (Smooth)</option><option value="en-US">English (Pro)</option></select>
-        <textarea id="tts-input" placeholder="Enter text..."></textarea>
+        <select id="voice-select">
+            <option value="ar-SA">Arabic (Smooth)</option>
+            <option value="en-US">English (Professional)</option>
+        </select>
+        <textarea id="tts-input" placeholder="Type text here..."></textarea>
         <button class="action-btn" onclick="speak()">Speak 🔊</button>
-        <button class="action-btn" style="background:#ff3366; color:#fff" onclick="window.speechSynthesis.cancel()">Stop ⏹</button>
-    </div>
-
-    <div id="notes" class="panel">
-        <div class="panel-header"><h2>Notes</h2><button class="close-p" onclick="toggle('notes')">&times;</button></div>
-        <textarea id="note-input" placeholder="New note..."></textarea>
-        <button class="action-btn" onclick="addNote()">Save Note +</button>
-        <div id="notes-list" style="margin-top:20px;"></div>
+        <button class="action-btn" style="background:#ff3366; color:#fff; margin-top:10px;" onclick="window.speechSynthesis.cancel()">Stop ⏹</button>
     </div>
 
     <div id="calc" class="panel">
@@ -158,16 +157,6 @@
             m.lang = document.getElementById('voice-select').value;
             m.rate = 0.9; m.pitch = 1.0;
             window.speechSynthesis.speak(m);
-        }
-
-        function addNote() {
-            const inp = document.getElementById('note-input');
-            if(!inp.value.trim()) return;
-            const div = document.createElement('div');
-            div.className = 'note-item';
-            div.innerHTML = `<span>${inp.value}</span><button onclick="this.parentElement.remove()" style="background:none; border:none; color:#ff3366; font-size:1.2rem; cursor:pointer;">&times;</button>`;
-            document.getElementById('notes-list').prepend(div);
-            inp.value = '';
         }
 
         let q = "";
