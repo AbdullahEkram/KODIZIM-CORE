@@ -1,4 +1,4 @@
-# 🌐 Kodizim Core | Quantum Hub Pro
+6# 🌐 Kodizim Core | Quantum Hub Pro
 **Lead Developer:** Abdullah Ikram Mahmoud  
 **Current Version:** 2.0 (Stable)
 **Location:** Egypt
@@ -27,7 +27,6 @@ Managed and Led by **Abdullah Ikram**, the team roles are distributed as follows
 | Moataz Mohsen | Assistant Developer |
 | AnaSemon Yosery | Assistant Designer |
 | Marina Magdy Talaat | Assistant Designer |
-| Radwa Mostafa | Assistant Designer |
 
 ## ⚙️ Key Features
 1.  **Neon Digital Clock:** A high-precision 24-hour digital clock.
