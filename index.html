@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kodizim | Operations Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>Kodizim | Elite Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --neon: #00f2ff; --bg: #020205; --p-bg: rgba(8, 8, 15, 0.98); --brd: rgba(0, 242, 255, 0.25);
@@ -14,204 +14,176 @@
             --neon: #007bff; --bg: #f5f7fa; --p-bg: rgba(255, 255, 255, 0.98); --brd: rgba(0, 123, 255, 0.25);
             --text: #1a1a1a; --card: rgba(0,0,0,0.05);
         }
-        body {
-            margin: 0; background: var(--bg); color: var(--text); font-family: 'Quicksand', sans-serif; height: 100vh;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;
-            transition: 0.3s; touch-action: manipulation;
-        }
+        body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Quicksand', sans-serif; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
 
-        /* Responsive Header */
-        .top-header {
-            position: fixed; top: 25px; left: 30px; right: 30px;
-            display: flex; justify-content: space-between; align-items: center; z-index: 1500;
-        }
-        .brand-group { display: flex; align-items: center; gap: 15px; }
-        .kodizim-icon {
-            width: 45px; height: 45px; border: 2px solid var(--neon); border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Share Tech Mono', monospace; font-size: 1.6rem; font-weight: bold;
-            color: var(--neon); box-shadow: 0 0 15px var(--neon); background: rgba(0, 242, 255, 0.05);
-        }
-        .brand-name { font-family: 'Share Tech Mono', monospace; font-size: 1.4rem; letter-spacing: 3px; font-weight: bold; }
+        /* Stage 1: Terminal Loader */
+        #terminal-loader { position: fixed; inset: 0; background: #000; z-index: 10000; padding: 30px; font-family: 'Share Tech Mono', monospace; color: #0f0; display: flex; flex-direction: column; }
+        .cursor { inline-block; width: 10px; height: 18px; background: #0f0; animation: blink 0.8s infinite; vertical-align: middle; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Stage 2: Identity Reveal */
+        #identity-reveal { position: fixed; inset: 0; background: var(--bg); z-index: 9999; display: none; flex-direction: column; align-items: center; justify-content: center; }
+        .big-k { width: 100px; height: 100px; border: 4px solid var(--neon); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: var(--neon); box-shadow: 0 0 30px var(--neon); margin-bottom: 20px; }
+        .big-name { font-family: 'Share Tech Mono'; font-size: 2.5rem; letter-spacing: 10px; text-transform: uppercase; }
+
+        /* Stage 3: Main UI */
+        #main-site { opacity: 0; transition: 1.5s; display: none; flex-direction: column; align-items: center; width: 100%; }
         
-        .theme-toggle {
-            width: 50px; height: 50px; border-radius: 15px; background: var(--card); 
-            border: 1px solid var(--brd); color: var(--neon); cursor: pointer;
-            display: flex; align-items: center; justify-content: center; font-size: 1.3rem; transition: 0.3s;
-        }
-
-        /* Clock Frame */
+        .top-header { position: fixed; top: 25px; left: 30px; right: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .kodizim-icon { width: 45px; height: 45px; border: 2px solid var(--neon); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Share Tech Mono'; font-size: 1.6rem; color: var(--neon); box-shadow: 0 0 15px var(--neon); }
+        
         .clock-frame { margin-bottom: 40px; padding: 20px 60px; border-radius: 30px; border: 1px solid var(--brd); backdrop-filter: blur(15px); }
-        #clock { font-size: clamp(3rem, 18vw, 8rem); font-family: 'Share Tech Mono', monospace; color: var(--neon); text-shadow: 0 0 20px var(--neon); }
+        #clock { font-size: clamp(3rem, 15vw, 7rem); font-family: 'Share Tech Mono'; color: var(--neon); text-shadow: 0 0 20px var(--neon); }
 
-        /* Navigation */
         .center-nav { display: flex; gap: 30px; z-index: 1000; }
-        .nav-btn {
-            width: 75px; height: 75px; border-radius: 22px; background: var(--card); border: 1px solid var(--brd);
-            color: var(--neon); font-size: 1.8rem; cursor: pointer; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex; align-items: center; justify-content: center;
-        }
-        .nav-btn:hover { transform: translateY(-10px); border-color: var(--neon); }
+        .nav-btn { width: 70px; height: 70px; border-radius: 20px; background: var(--card); border: 1px solid var(--brd); color: var(--neon); font-size: 1.8rem; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; }
+        .nav-btn:hover { transform: translateY(-5px); border-color: var(--neon); }
 
-        /* Panels Desktop Optimized */
-        .panel {
-            position: fixed; right: -100%; top: 0; width: 100%; height: 100%; background: var(--p-bg);
-            backdrop-filter: blur(30px); padding: 40px; transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1); z-index: 2000;
-            box-sizing: border-box; overflow-y: auto; border-left: 1px solid var(--brd);
-        }
-        @media (min-width: 1024px) {
-            .panel { width: 500px; right: -550px; height: 90vh; top: 5vh; border-radius: 35px; border: 1px solid var(--brd); }
-            .panel.open { right: 40px; }
-        }
+        /* Panels */
+        .panel { position: fixed; right: -100%; top: 0; width: 100%; height: 100%; background: var(--p-bg); backdrop-filter: blur(30px); padding: 40px; transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1); z-index: 2000; box-sizing: border-box; overflow-y: auto; border-left: 1px solid var(--brd); }
+        @media (min-width: 1024px) { .panel { width: 450px; right: -500px; height: 85vh; top: 7.5vh; border-radius: 30px; border: 1px solid var(--brd); } .panel.open { right: 30px; } }
         .panel.open { right: 0; }
-        .panel-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--brd); padding-bottom: 20px; margin-bottom: 30px; }
+        .panel-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--brd); padding-bottom: 20px; margin-bottom: 25px; }
         .close-p { background: none; border: none; color: #ff3366; font-size: 2.5rem; cursor: pointer; }
 
-        /* Enhanced Member Cards */
-        .member-card { 
-            background: var(--card); border-radius: 18px; padding: 22px; margin-bottom: 15px; 
-            border: 1px solid var(--brd); transition: 0.3s; position: relative; overflow: hidden;
-        }
-        .member-card.lead { border-color: var(--neon); background: rgba(0, 242, 255, 0.1); border-width: 2px; }
-        .member-name { font-weight: 700; font-size: 1.25rem; display: block; color: var(--text); }
-        .member-role { font-size: 0.75rem; color: var(--neon); text-transform: uppercase; font-weight: 700; letter-spacing: 1.5px; display: block; margin-top: 6px; }
-        .member-loc { font-size: 0.7rem; opacity: 0.6; display: block; margin-top: 4px; }
-
-        /* Other Controls */
-        select, textarea { width: 100%; background: var(--card); border: 1px solid var(--brd); border-radius: 18px; color: var(--text); padding: 18px; margin-bottom: 15px; outline: none; font-size: 1.1rem; }
-        .action-btn { width: 100%; padding: 20px; border-radius: 18px; border: none; font-weight: bold; cursor: pointer; background: var(--neon); color: #000; font-size: 1.1rem; }
-
-        .calc-screen { background: #000; border: 1px solid var(--brd); border-radius: 20px; padding: 30px; text-align: right; font-size: 2.5rem; color: var(--neon); font-family: 'Share Tech Mono', monospace; margin-bottom: 20px; min-height: 60px; }
-        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
-        .c-btn { padding: 22px; background: var(--card); border-radius: 15px; border: 1px solid var(--brd); color: var(--text); cursor: pointer; font-size: 1.3rem; }
+        /* Calculator & Team Styles */
+        .member-card { background: var(--card); border-radius: 15px; padding: 15px; margin-bottom: 10px; border: 1px solid var(--brd); }
+        .member-card.lead { border-color: var(--neon); background: rgba(0, 242, 255, 0.08); }
+        .calc-screen { background: #000; border: 1px solid var(--brd); border-radius: 15px; padding: 25px; text-align: right; font-size: 2.2rem; color: var(--neon); font-family: 'Share Tech Mono'; margin-bottom: 15px; }
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .c-btn { padding: 18px; background: var(--card); border-radius: 12px; border: 1px solid var(--brd); color: #fff; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <header class="top-header">
-        <div class="brand-group">
-            <div class="kodizim-icon">K</div>
-            <div class="brand-name">Kodizim</div>
-        </div>
-        <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
-    </header>
+    <div id="terminal-loader">
+        <div id="lines"></div><span class="cursor"></span>
+    </div>
 
-    <div class="clock-frame"><div id="clock">00:00:00</div></div>
+    <div id="identity-reveal">
+        <div class="big-k">K</div>
+        <div class="big-name" id="rev-name">Kodizim</div>
+    </div>
 
-    <nav class="center-nav">
-        <button class="nav-btn" onclick="toggle('team')">👥</button>
-        <button class="nav-btn" onclick="toggle('tts')">🔊</button>
-        <button class="nav-btn" onclick="toggle('calc')">⧓</button>
-    </nav>
+    <div id="main-site">
+        <header class="top-header">
+            <div style="display:flex; align-items:center; gap:15px;">
+                <div class="kodizim-icon">K</div>
+                <div style="font-family:'Share Tech Mono'; letter-spacing:3px;">KODIZIM</div>
+            </div>
+            <button class="nav-btn" style="width:45px; height:45px; font-size:1.2rem;" onclick="document.body.classList.toggle('light-mode')">🌓</button>
+        </header>
+
+        <div class="clock-frame"><div id="clock">00:00:00</div></div>
+
+        <nav class="center-nav">
+            <button class="nav-btn" onclick="toggle('team')">👥</button>
+            <button class="nav-btn" onclick="toggle('tts')">🔊</button>
+            <button class="nav-btn" onclick="toggle('calc')">⧓</button>
+        </nav>
+    </div>
 
     <div id="team" class="panel">
         <div class="panel-header"><h2>Core Team</h2><button class="close-p" onclick="toggle('team')">&times;</button></div>
-        
-        <div class="member-card lead">
-            <span class="member-name">Abdullah Ikram Mahmoud</span>
-            <span class="member-role">Team Leader & Chief Architect</span>
-            <span class="member-loc">Project Oversight & Lead Programming</span>
-        </div>
-
-        <div class="member-card">
-            <span class="member-name">Mohamed Refaie</span>
-            <span class="member-role">Senior Developer</span>
-            <span class="member-loc">Logic Implementation & System Integration</span>
-        </div>
-
-        <div class="member-card">
-            <span class="member-name">Mohamed Shehata</span>
-            <span class="member-role">Backend Engineer</span>
-            <span class="member-loc">Data Processing & Performance Optimization</span>
-        </div>
-
-        <div class="member-card">
-            <span class="member-name">Moataz Mohsen</span>
-            <span class="member-role">Security Analyst</span>
-            <span class="member-loc">Input Validation & Code Security</span>
-        </div>
-
-        <div class="member-card">
-            <span class="member-name">AnaSemon Yosery</span>
-            <span class="member-role">UI/UX Designer</span>
-            <span class="member-loc">Visual Interface & Creative Assets</span>
-        </div>
-
-        <div class="member-card">
-            <span class="member-name">Marina Magdy Talaat</span>
-            <span class="member-role">Content Strategist</span>
-            <span class="member-loc">Digital Assets & Documentation</span>
-        </div>
-
-        <div class="member-card">
-            <span class="member-name">Radwa Mostafa</span>
-            <span class="member-role">Quality Assurance</span>
-            <span class="member-loc">Testing & User Experience Review</span>
-        </div>
+        <div class="member-card lead"><b>Abdullah Ikram</b><br><small style="color:var(--neon)">Team Leader & Chief Architect</small></div>
+        <div class="member-card"><b>Mohamed Refaie</b><br><small>Senior Developer</small></div>
+        <div class="member-card"><b>Mohamed Shehata</b><br><small>Backend Engineer</small></div>
+        <div class="member-card"><b>Moataz Mohsen</b><br><small>Security Analyst</small></div>
+        <div class="member-card"><b>AnaSemon Yosery</b><br><small>UI/UX Designer</small></div>
+        <div class="member-card"><b>Marina Magdy Talaat</b><br><small>Content Strategist</small></div>
+        <div class="member-card"><b>Radwa Mostafa</b><br><small>Quality Assurance</small></div>
     </div>
 
     <div id="tts" class="panel">
         <div class="panel-header"><h2>Speech Engine</h2><button class="close-p" onclick="toggle('tts')">&times;</button></div>
-        <select id="voice-select"><option value="ar-SA">Arabic</option><option value="en-US">English</option></select>
-        <textarea id="tts-input" placeholder="Enter text for AI voice..."></textarea>
-        <button class="action-btn" onclick="speak()">Speak 🔊</button>
+        <textarea id="tts-input" placeholder="Enter text..." style="width:100%; height:150px; background:var(--card); border:1px solid var(--brd); color:#fff; border-radius:15px; padding:15px;"></textarea>
+        <button onclick="speak()" style="width:100%; padding:20px; background:var(--neon); color:#000; border:none; border-radius:15px; margin-top:15px; font-weight:bold; cursor:pointer;">SPEAK 🔊</button>
     </div>
 
     <div id="calc" class="panel">
         <div class="panel-header"><h2>Calculator</h2><button class="close-p" onclick="toggle('calc')">&times;</button></div>
         <div class="calc-screen" id="display">0</div>
-        <div class="calc-grid">
-            <button class="c-btn" onclick="clr()" style="color:#ff3366">AC</button>
-            <button class="c-btn" onclick="put('/')">/</button><button class="c-btn" onclick="put('*')">×</button><button class="c-btn" onclick="put('-')">−</button>
-            <button class="c-btn" onclick="put('7')">7</button><button class="c-btn" onclick="put('8')">8</button><button class="c-btn" onclick="put('9')">9</button><button class="c-btn" onclick="put('+')">+</button>
-            <button class="c-btn" onclick="put('4')">4</button><button class="c-btn" onclick="put('5')">5</button><button class="c-btn" onclick="put('6')">6</button><button class="c-btn" onclick="exe()" style="grid-row: span 2; background:var(--neon); color:#000">=</button>
-            <button class="c-btn" onclick="put('1')">1</button><button class="c-btn" onclick="put('2')">2</button><button class="c-btn" onclick="put('3')">3</button>
-            <button class="c-btn" onclick="put('0')" style="grid-column: span 2;">0</button><button class="c-btn" onclick="put('.')">.</button>
-        </div>
+        <div class="calc-grid" id="calc-btns">
+            </div>
     </div>
 
     <script>
-        function updateTime() {
-            const d = new Date();
-            document.getElementById('clock').innerText = d.toTimeString().split(' ')[0];
+        // Loader Logic
+        const lines = [
+            "> Initializing Kodizim Systems...",
+            "> Connection established with Core...",
+            "> Security Check: Passed",
+            "> Welcome, Abdullah Ekram",
+            "> Redirecting to Dashboard..."
+        ];
+        let lIdx = 0;
+        function runLoader() {
+            if(lIdx < lines.length) {
+                const d = document.createElement('div'); d.innerText = lines[lIdx++];
+                document.getElementById('lines').appendChild(d);
+                setTimeout(runLoader, 600);
+            } else {
+                setTimeout(() => {
+                    document.getElementById('terminal-loader').style.display = 'none';
+                    document.getElementById('identity-reveal').style.display = 'flex';
+                    setTimeout(() => {
+                        document.getElementById('identity-reveal').style.opacity = '0';
+                        document.getElementById('identity-reveal').style.transition = '1s';
+                        setTimeout(() => {
+                            document.getElementById('identity-reveal').style.display = 'none';
+                            document.getElementById('main-site').style.display = 'flex';
+                            setTimeout(() => document.getElementById('main-site').style.opacity = '1', 50);
+                        }, 1000);
+                    }, 2000);
+                }, 800);
+            }
         }
+
+        // Clock
+        function updateTime() { document.getElementById('clock').innerText = new Date().toTimeString().split(' ')[0]; }
         setInterval(updateTime, 1000); updateTime();
 
-        function toggle(id) {
+        // UI Helpers
+        function toggle(id) { 
             const p = document.getElementById(id);
-            const active = p.classList.contains('open');
+            const isOpen = p.classList.contains('open');
             document.querySelectorAll('.panel').forEach(el => el.classList.remove('open'));
-            if(!active) p.classList.add('open');
+            if(!isOpen) p.classList.add('open');
         }
 
-        function toggleTheme() { document.body.classList.toggle('light-mode'); }
-
-        function speak() {
-            window.speechSynthesis.cancel();
-            const t = document.getElementById('tts-input').value;
-            if(!t.trim()) return;
-            const m = new SpeechSynthesisUtterance(t);
-            m.lang = document.getElementById('voice-select').value;
-            window.speechSynthesis.speak(m);
-        }
-
+        // Calc Logic
         let q = "";
         const disp = document.getElementById('display');
-        function put(v) { q += v; disp.innerText = q; }
-        function clr() { q = ""; disp.innerText = "0"; }
-        function exe() {
-            try { q = new Function('return ' + q)().toString(); disp.innerText = q; }
-            catch { disp.innerText = "Error"; q = ""; }
+        const btns = ['AC','/','*','-','7','8','9','+','4','5','6','=','1','2','3','0','.'];
+        const grid = document.getElementById('calc-btns');
+        btns.forEach(b => {
+            const btn = document.createElement('button');
+            btn.className = 'c-btn'; btn.innerText = b;
+            if(b === '=') btn.style.gridRow = 'span 2';
+            if(b === '=') btn.style.background = 'var(--neon)';
+            if(b === '=') btn.onclick = () => { try{ q = eval(q).toString(); disp.innerText = q; }catch{ disp.innerText="Error"; q=""; } };
+            else if(b === 'AC') btn.onclick = () => { q = ""; disp.innerText = "0"; };
+            else btn.onclick = () => { q += b; disp.innerText = q; };
+            grid.appendChild(btn);
+        });
+
+        // TTS
+        function speak() {
+            window.speechSynthesis.cancel();
+            const m = new SpeechSynthesisUtterance(document.getElementById('tts-input').value);
+            m.lang = 'ar-SA'; window.speechSynthesis.speak(m);
         }
 
-        window.addEventListener('keydown', (e) => {
-            const calcOpen = document.getElementById('calc').classList.contains('open');
-            if (!calcOpen) return;
-            if (e.key >= '0' && e.key <= '9' || ['+', '-', '*', '/', '.'].includes(e.key)) put(e.key);
-            if (e.key === 'Enter') exe();
-            if (e.key === 'Escape' || (e.key === 'Backspace' && q === "")) clr();
-            if (e.key === 'Backspace' && q !== "") { q = q.slice(0, -1); disp.innerText = q || "0"; }
-        });
+        // Keyboard support
+        window.onkeydown = (e) => {
+            if(document.getElementById('calc').classList.contains('open')) {
+                if(e.key >= '0' && e.key <= '9' || ['+','-','*','/','.'].includes(e.key)) { q += e.key; disp.innerText = q; }
+                if(e.key === 'Enter') { try{ q = eval(q).toString(); disp.innerText = q; }catch{ disp.innerText="Error"; q=""; } }
+                if(e.key === 'Backspace') { q = q.slice(0,-1); disp.innerText = q || "0"; }
+            }
+        };
+
+        window.onload = runLoader;
     </script>
 </body>
 </html>
